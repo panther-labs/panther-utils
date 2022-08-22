@@ -1,33 +1,26 @@
-packages = panther_utils
+# Targets for local development
+install:: utl_activate ci_install
+fmt::     install ci_fmt
+lint::    fmt ci_lint
+test::    fmt ci_test
 
+# Targets for CI
+ci_install::
+	pip3 install -qr dev-requirements.txt
 
-deps:
-	pipenv install --dev
+ci_fmt::
+	black panther_utils tests
 
-deps-update:
-	pipenv update
-	pipenv lock -r  > requirements.txt
+ci_lint::
+	mypy --config-file mypy.ini panther_utils
 
-lint:
-	pipenv run mypy $(packages) --disallow-untyped-defs --ignore-missing-imports --warn-unused-ignores
+ci_test::
+	nosetests -v
 
-fmt:
-	pipenv run isort --profile=black $(packages)
-	pipenv run black --line-length=100 $(packages)
+# Utility targets
+venv:
+	python3 -m venv venv
 
-install:
-	pipenv install --dev
-	pipenv lock -r  > requirements.txt
+utl_activate: venv
+	. venv/bin/activate
 
-package-clean:
-	rm -rf dist
-	rm -f MANIFEST
-
-package: package-clean install test lint
-	pipenv run python3 setup.py sdist
-
-publish: install package
-	twine upload dist/*
-
-test:
-	pipenv run nosetests -v

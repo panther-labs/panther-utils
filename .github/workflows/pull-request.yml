@@ -1,0 +1,39 @@
+name: pr
+
+on:
+  pull_request:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+  install:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - run: make ci_install
+
+  fmt:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - run: make ci_fmt
+
+  test:
+    runs-on: ubuntu-latest
+    needs: fmt
+    steps:
+      - run: ci-test
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: fmt
+    steps:
+      - run: ci-lint
+
