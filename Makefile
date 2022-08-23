@@ -1,8 +1,8 @@
 # Targets for local development
-install:: utl_activate ci_install
-fmt::     install ci_fmt
-lint::    fmt ci_lint
-test::    fmt ci_test
+install: utl_activate ci_install
+fmt:     install ci_fmt
+lint:    fmt ci_lint
+test:    fmt ci_test
 
 # Targets for CI
 ci_install:
