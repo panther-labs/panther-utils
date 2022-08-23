@@ -29,11 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - run: ci_test
+      - run: make ci_test
 
   lint:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - run: ci_lint
+      - run: make ci_lint
 
