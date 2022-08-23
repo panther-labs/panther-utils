@@ -6,10 +6,16 @@ __all__ = ["ips_in_cidr"]
 
 
 def ips_in_cidr(cidr: str, path: str = "p_any_ip_addresses") -> detection.PythonFilter:
-    return detection.PythonFilter(func=_ip_in_cidr, params=dict(path=path, cidr=cidr))
+    return detection.PythonFilter(
+        func=_ip_in_cidr,
+        params={
+            "path": path,
+            "cidr": cidr,
+        },
+    )
 
 
-def _ip_in_cidr(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
+def _ip_in_cidr(obj: typing.Any, params: typing.Any) -> bool:
     import ipaddress
     import functools
     import collections

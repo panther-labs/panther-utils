@@ -6,18 +6,18 @@ __all__ = ["deep_equal"]
 
 
 def deep_equal(path: str, value: typing.Any) -> detection.PythonFilter:
-    keys = path.split(".")
     return detection.PythonFilter(
         func=_deep_equal,
-        params=dict(keys=keys, expected=value),
+        params={"path": path, "expected": value},
     )
 
 
-def _deep_equal(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
+def _deep_equal(obj: typing.Any, params: typing.Any) -> bool:
     import functools
     import collections
 
-    keys = params["keys"]
+    path = params["path"]
+    keys = path.split(".")
     expected = params["expected"]
 
     actual = functools.reduce(
@@ -26,4 +26,4 @@ def _deep_equal(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
         obj,
     )
 
-    return actual == expected
+    return bool(actual == expected)
