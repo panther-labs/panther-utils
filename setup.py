@@ -3,13 +3,14 @@ from setuptools import setup, find_packages
 
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
+version = (this_directory / "VERSION").read_text()
 
 setup(
     name='panther_utils',
     url="https://panther.com",
     author="Panther Labs Inc.",
     author_email="support@panther.io",
-    version='0.0.1',
+    version=version,
     packages=find_packages(),
     python_requires=">=3.9",
     long_description=long_description,
