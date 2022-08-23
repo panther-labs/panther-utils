@@ -15,6 +15,7 @@ setup(
     python_requires=">=3.9",
     long_description=long_description,
     long_description_content_type='text/markdown',
+    include_package_data=True,
     keywords='security detection',
     install_requires=[
         'panther_core>=0.0.6,<0.1.0',
