@@ -1,6 +1,5 @@
+from panther_config import testing
 from panther_utils import match_filters
-
-from . import testing
 
 
 class TestMatchFilters(testing.PantherPythonFilterTestCase):

@@ -8,12 +8,12 @@ __all__ = ["deep_equal"]
 def deep_equal(path: str, value: typing.Any) -> detection.PythonFilter:
     keys = path.split(".")
     return detection.PythonFilter(
-        func=_filter_equal_inner,
-        params=dict(keys=keys, expected=value)
+        func=_deep_equal,
+        params=dict(keys=keys, expected=value),
     )
 
 
-def _filter_equal_inner(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
+def _deep_equal(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
     import functools
     import collections
 

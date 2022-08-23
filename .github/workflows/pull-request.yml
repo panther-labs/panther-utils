@@ -24,6 +24,9 @@ jobs:
     needs: install
     steps:
       - run: make ci_fmt
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: automatic formatting
 
   test:
     runs-on: ubuntu-latest

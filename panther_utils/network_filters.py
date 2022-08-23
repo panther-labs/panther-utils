@@ -2,22 +2,40 @@ import typing
 
 from panther_config import detection
 
-__all__ = ["ip_in_range"]
+__all__ = ["ips_in_cidr"]
 
 
-def ip_in_cidr(path: str, cidr: str) -> detection.PythonFilter:
+def ips_in_cidr(cidr: str, path: str = "p_any_ip_addresses") -> detection.PythonFilter:
+    return detection.PythonFilter(func=_ip_in_cidr, params=dict(path=path, cidr=cidr))
+
+
+def _ip_in_cidr(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
+    import ipaddress
+    import functools
+    import collections
+
+    path = params["path"]
+    cidr = ipaddress.ip_network(params["cidr"])
+
     keys = path.split(".")
-    return detection.PythonFilter(
-        func=_ip_in_range, params=dict(keys=keys, cidr=cidr)
+
+    obj_at_path = functools.reduce(
+        lambda d, key: d.get(key, None) if isinstance(d, collections.Mapping) else None,
+        keys,
+        obj,
     )
 
+    if obj_at_path is None:
+        raise RuntimeError(f"no value found at path '{path}'")
 
-def _ip_in_range(obj: dict, params: typing.Dict[str, typing.Any]) -> bool:
-    import ipaddress
+    if isinstance(obj_at_path, str):
+        return ipaddress.ip_address(obj_at_path) in cidr
 
-    keys = params["keys"]
-    cidr = params["cidr"]
+    if isinstance(obj_at_path, collections.Iterable):
+        for ip in obj_at_path:
+            if ipaddress.ip_address(ip) in cidr:
+                return True
 
-    ipaddress.
+        return False
 
-    return actual == expected
+    raise RuntimeError(f"IP value at path '{path}' was not a string or iterable")
