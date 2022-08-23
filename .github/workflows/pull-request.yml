@@ -29,11 +29,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
+      - uses: actions/checkout@v3
       - run: make ci_test
 
   lint:
     runs-on: ubuntu-latest
     needs: setup
     steps:
+      - uses: actions/checkout@v3
       - run: make ci_lint
 
