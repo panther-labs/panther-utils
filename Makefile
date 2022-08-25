@@ -2,7 +2,7 @@
 install:: utl_activate ci_install
 fmt::     install ci_fmt
 lint::    fmt ci_lint
-test::    fmt ci_test
+test::    fmt ci_lint ci_test
 
 # Targets for CI
 ci_install::
@@ -12,7 +12,7 @@ ci_fmt::
 	black panther_utils tests
 
 ci_lint::
-	mypy --config-file mypy.ini panther_utils
+	mypy --config-file mypy.ini panther_utils tests
 
 ci_test::
 	nosetests -v
