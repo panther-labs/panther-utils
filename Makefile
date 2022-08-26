@@ -15,7 +15,7 @@ ci_lint::
 	mypy --config-file mypy.ini panther_utils tests
 
 ci_test::
-	nosetests -v
+	nosetests -v --with-coverage --cover-package=panther_utils --cover-min-percentage=100
 
 # Utility targets
 venv:
