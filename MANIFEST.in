@@ -1,1 +1,2 @@
 include VERSION
+include panther_utils/py.typed
