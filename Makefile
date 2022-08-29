@@ -2,7 +2,7 @@
 install:: utl_activate ci_install
 fmt::     install ci_fmt
 lint::    fmt ci_lint
-test::    fmt ci_test
+test::    fmt ci_lint ci_test
 
 # Targets for CI
 ci_install::
@@ -12,10 +12,10 @@ ci_fmt::
 	black panther_utils tests
 
 ci_lint::
-	mypy --config-file mypy.ini panther_utils
+	mypy --config-file mypy.ini panther_utils tests
 
 ci_test::
-	nosetests -v
+	nosetests -v --with-coverage --cover-package=panther_utils --cover-min-percentage=100
 
 # Utility targets
 venv:
@@ -24,3 +24,7 @@ venv:
 utl_activate: venv
 	. venv/bin/activate
 
+publish: utl_activate
+	rm -rf dist
+	python3 setup.py sdist
+	twine upload ./dist/panther_utils-*.tar.gz
