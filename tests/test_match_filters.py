@@ -135,3 +135,6 @@ class TestMatchFilters(testing.PantherPythonFilterTestCase):
 
         self.assertFilterNotMatches(test_filter, {"a": {"b": 50}})
         self.assertFilterNotMatches(test_filter, {"a": {"b": 51}})
+
+        self.assertRaises(RuntimeError, lambda: match_filters.deep_between("x", 45, 45))
+        self.assertRaises(RuntimeError, lambda: match_filters.deep_between("x", 45, 44))
