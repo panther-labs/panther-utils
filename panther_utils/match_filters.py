@@ -329,7 +329,7 @@ def deep_between_exclusive(
     val_min: typing.Union[int, float],
     val_max: typing.Union[int, float],
 ) -> detection.PythonFilter:
-    """Returns True if the value at the provided path is between (but not equal to) a maximum and minimum"""
+    """Returns True if the value at the provided path is between, but not equal to, a maximum and minimum"""
 
     if val_min >= val_max:
         raise RuntimeError("deep_between_exclusive: min must be greater than max")
