@@ -89,8 +89,8 @@ Listed below are all the available filters in the `match_filters` module alongsi
 | `deep_less_than_or_equal`    | `<=`                                     |
 | `deep_greater_than`          | `>`                                      |
 | `deep_greater_than_or_equal` | `>=`                                     |
-| `deep_between`               | `actual >= value >= actual`              |
-| `deep_between_exclusive`     | `actual > value > actual`                |
+| `deep_between`               | `val_min <= actual <= val_max`           |
+| `deep_between_exclusive`     | `val_min < actual < val_max`             |
 
 ## Network Filters
 The `ips_in_cidr` filter allows you to filter events based whether IPs are in a CIDR range. The optional `path` argument can target a dot-separated path to a single IP string or a list of IP strings. The `path` argument defaults to the Panther field `p_any_ip_addresses`. This filter uses the python [ipaddress](https://docs.python.org/3.9/library/ipaddress.html#) module to perform the comparison.

@@ -22,7 +22,7 @@ def deep_exists(path: str) -> detection.PythonFilter:
             event,
         )
 
-        return bool(actual is None)
+        return bool(actual is not None)
 
     return detection.PythonFilter(func=_deep_exists)
 
@@ -44,7 +44,7 @@ def deep_not_exists(path: str) -> detection.PythonFilter:
             event,
         )
 
-        return bool(actual is not None)
+        return bool(actual is None)
 
     return detection.PythonFilter(func=_deep_not_exists)
 
@@ -189,7 +189,9 @@ def deep_not_in(path: str, value: typing.List[typing.Any]) -> detection.PythonFi
     )
 
 
-def deep_less_than(path: str, value: typing.List[typing.Any]) -> detection.PythonFilter:
+def deep_less_than(
+    path: str, value: typing.Union[int, float]
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than a value"""
 
     def _deep_less_than(evt: PantherEvent) -> bool:
@@ -206,14 +208,16 @@ def deep_less_than(path: str, value: typing.List[typing.Any]) -> detection.Pytho
             evt,
         )
 
-        return actual < value
+        return bool(actual < value)
 
     return detection.PythonFilter(
         func=_deep_less_than,
     )
 
 
-def deep_less_than_or_equal(path: str, value: typing.List[typing.Any]) -> detection.PythonFilter:
+def deep_less_than_or_equal(
+    path: str, value: typing.Union[int, float]
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than or equal to a value"""
 
     def _deep_less_than_or_equal(evt: PantherEvent) -> bool:
@@ -230,14 +234,16 @@ def deep_less_than_or_equal(path: str, value: typing.List[typing.Any]) -> detect
             evt,
         )
 
-        return actual <= value
+        return bool(actual <= value)
 
     return detection.PythonFilter(
         func=_deep_less_than_or_equal,
     )
 
 
-def deep_greater_than(path: str, value: typing.List[typing.Any]) -> detection.PythonFilter:
+def deep_greater_than(
+    path: str, value: typing.Union[int, float]
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than a value"""
 
     def _deep_greater_than(evt: PantherEvent) -> bool:
@@ -254,14 +260,16 @@ def deep_greater_than(path: str, value: typing.List[typing.Any]) -> detection.Py
             evt,
         )
 
-        return actual > value
+        return bool(actual > value)
 
     return detection.PythonFilter(
         func=_deep_greater_than,
     )
 
 
-def deep_greater_than_or_equal(path: str, value: typing.List[typing.Any]) -> detection.PythonFilter:
+def deep_greater_than_or_equal(
+    path: str, value: typing.Union[int, float]
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than or equal to a value"""
 
     def _deep_greater_than_or_equal(evt: PantherEvent) -> bool:
@@ -278,15 +286,22 @@ def deep_greater_than_or_equal(path: str, value: typing.List[typing.Any]) -> det
             evt,
         )
 
-        return actual >= value
+        return bool(actual >= value)
 
     return detection.PythonFilter(
         func=_deep_greater_than_or_equal,
     )
 
 
-def deep_between(path: str, val_min: typing.Any, val_max: typing.Any) -> detection.PythonFilter:
+def deep_between(
+    path: str,
+    val_min: typing.Union[int, float],
+    val_max: typing.Union[int, float],
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between (or equal to) a maximum and minimum"""
+
+    if val_min >= val_max:
+        raise RuntimeError("deep_between: min must be greater than max")
 
     def _deep_between(evt: PantherEvent) -> bool:
         import functools
@@ -302,15 +317,22 @@ def deep_between(path: str, val_min: typing.Any, val_max: typing.Any) -> detecti
             evt,
         )
 
-        return val_min >= actual >= val_max
+        return bool(val_min <= actual <= val_max)
 
     return detection.PythonFilter(
         func=_deep_between,
     )
 
 
-def deep_between_exclusive(path: str, val_min: typing.Any, val_max: typing.Any) -> detection.PythonFilter:
+def deep_between_exclusive(
+    path: str,
+    val_min: typing.Union[int, float],
+    val_max: typing.Union[int, float],
+) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between (but not equal to) a maximum and minimum"""
+
+    if val_min >= val_max:
+        raise RuntimeError("deep_between_exclusive: min must be greater than max")
 
     def _deep_between_exclusive(evt: PantherEvent) -> bool:
         import functools
@@ -326,9 +348,8 @@ def deep_between_exclusive(path: str, val_min: typing.Any, val_max: typing.Any) 
             evt,
         )
 
-        return val_min > actual > val_max
+        return bool(val_min < actual < val_max)
 
     return detection.PythonFilter(
         func=_deep_between_exclusive,
     )
-
