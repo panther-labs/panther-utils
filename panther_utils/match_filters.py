@@ -16,7 +16,7 @@ def deep_exists(path: str) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             event,
@@ -38,7 +38,7 @@ def deep_not_exists(path: str) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             event,
@@ -60,7 +60,7 @@ def deep_equal(path: str, value: typing.Any) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             event,
@@ -82,7 +82,7 @@ def deep_not_equal(path: str, value: typing.Any) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             event,
@@ -106,7 +106,7 @@ def deep_equal_pattern(path: str, pattern: str) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -130,7 +130,7 @@ def deep_not_equal_pattern(path: str, pattern: str) -> detection.PythonFilter:
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -152,7 +152,7 @@ def deep_in(path: str, value: typing.List[typing.Any]) -> detection.PythonFilter
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -176,7 +176,7 @@ def deep_not_in(path: str, value: typing.List[typing.Any]) -> detection.PythonFi
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -190,7 +190,7 @@ def deep_not_in(path: str, value: typing.List[typing.Any]) -> detection.PythonFi
 
 
 def deep_less_than(
-    path: str, value: typing.Union[int, float]
+        path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than a value"""
 
@@ -202,7 +202,7 @@ def deep_less_than(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -216,7 +216,7 @@ def deep_less_than(
 
 
 def deep_less_than_or_equal(
-    path: str, value: typing.Union[int, float]
+        path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than or equal to a value"""
 
@@ -228,7 +228,7 @@ def deep_less_than_or_equal(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -242,7 +242,7 @@ def deep_less_than_or_equal(
 
 
 def deep_greater_than(
-    path: str, value: typing.Union[int, float]
+        path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than a value"""
 
@@ -254,7 +254,7 @@ def deep_greater_than(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -268,7 +268,7 @@ def deep_greater_than(
 
 
 def deep_greater_than_or_equal(
-    path: str, value: typing.Union[int, float]
+        path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than or equal to a value"""
 
@@ -280,7 +280,7 @@ def deep_greater_than_or_equal(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -294,9 +294,9 @@ def deep_greater_than_or_equal(
 
 
 def deep_between(
-    path: str,
-    val_min: typing.Union[int, float],
-    val_max: typing.Union[int, float],
+        path: str,
+        val_min: typing.Union[int, float],
+        val_max: typing.Union[int, float],
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between (or equal to) a maximum and minimum"""
 
@@ -311,7 +311,7 @@ def deep_between(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,
@@ -325,9 +325,9 @@ def deep_between(
 
 
 def deep_between_exclusive(
-    path: str,
-    val_min: typing.Union[int, float],
-    val_max: typing.Union[int, float],
+        path: str,
+        val_min: typing.Union[int, float],
+        val_max: typing.Union[int, float],
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between, but not equal to, a maximum and minimum"""
 
@@ -342,7 +342,7 @@ def deep_between_exclusive(
 
         actual = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             evt,

@@ -15,7 +15,7 @@ def ips_in_cidr(cidr: str, path: str = "p_any_ip_addresses") -> detection.Python
 
         obj_at_path = functools.reduce(
             lambda d, key: d.get(key, None)
-            if isinstance(d, collections.Mapping)
+            if isinstance(d, collections.abc.Mapping)
             else None,
             keys,
             obj,
@@ -27,7 +27,7 @@ def ips_in_cidr(cidr: str, path: str = "p_any_ip_addresses") -> detection.Python
         if isinstance(obj_at_path, str):
             return ipaddress.ip_address(obj_at_path) in cidr_network
 
-        if isinstance(obj_at_path, collections.Iterable):
+        if isinstance(obj_at_path, collections.abc.Iterable):
             for ip in obj_at_path:
                 if ipaddress.ip_address(ip) in cidr_network:
                     return True
