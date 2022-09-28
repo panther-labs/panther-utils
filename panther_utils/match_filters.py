@@ -190,7 +190,7 @@ def deep_not_in(path: str, value: typing.List[typing.Any]) -> detection.PythonFi
 
 
 def deep_less_than(
-        path: str, value: typing.Union[int, float]
+    path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than a value"""
 
@@ -216,7 +216,7 @@ def deep_less_than(
 
 
 def deep_less_than_or_equal(
-        path: str, value: typing.Union[int, float]
+    path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is less than or equal to a value"""
 
@@ -242,7 +242,7 @@ def deep_less_than_or_equal(
 
 
 def deep_greater_than(
-        path: str, value: typing.Union[int, float]
+    path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than a value"""
 
@@ -268,7 +268,7 @@ def deep_greater_than(
 
 
 def deep_greater_than_or_equal(
-        path: str, value: typing.Union[int, float]
+    path: str, value: typing.Union[int, float]
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is greater than or equal to a value"""
 
@@ -294,9 +294,9 @@ def deep_greater_than_or_equal(
 
 
 def deep_between(
-        path: str,
-        val_min: typing.Union[int, float],
-        val_max: typing.Union[int, float],
+    path: str,
+    val_min: typing.Union[int, float],
+    val_max: typing.Union[int, float],
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between (or equal to) a maximum and minimum"""
 
@@ -325,9 +325,9 @@ def deep_between(
 
 
 def deep_between_exclusive(
-        path: str,
-        val_min: typing.Union[int, float],
-        val_max: typing.Union[int, float],
+    path: str,
+    val_min: typing.Union[int, float],
+    val_max: typing.Union[int, float],
 ) -> detection.PythonFilter:
     """Returns True if the value at the provided path is between, but not equal to, a maximum and minimum"""
 
