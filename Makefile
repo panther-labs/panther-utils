@@ -1,5 +1,4 @@
 # Targets for local development
-init::    git_reset
 shell::   pipenv shell
 install:: ci_install
 sync::    ci_sync 
@@ -26,7 +25,7 @@ ci_sync:
 	pipenv sync --dev
 
 # Other targets
-publish: utl_activate
+publish:
 	rm -rf dist
 	pipenv run python3 setup.py sdist
 	pipenv run twine upload ./dist/panther_utils-*.tar.gz
