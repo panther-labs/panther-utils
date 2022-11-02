@@ -1,6 +1,6 @@
 import typing
 
-from panther_config import detection, PantherEvent
+from panther_sdk import detection, PantherEvent
 
 __all__ = ["deep_equal", "deep_equal_pattern", "deep_in"]
 

@@ -1,12 +1,12 @@
 # panther-utils
-Panther Config SDK utilities repo
+Panther SDK utilities repo
 
 ## Match Filters
 
 The `deep_exists` filter allows you to filter events based on a field match. Use `deep_not_exists` for the inverse.
 
 ```python
-from panther_config import detection
+from panther_sdk import detection
 from panther_utils import match_filters
 
 # example: alert if a security log has a warning message
@@ -24,7 +24,7 @@ detection.Rule(
 The `deep_equal` filter allows you to filter events based on a field match. Use `deep_not_equal` for the inverse.
 
 ```python
-from panther_config import detection
+from panther_sdk import detection
 from panther_utils import match_filters
 
 # example: match server logs with insecure POST requests
@@ -41,7 +41,7 @@ detection.Rule(
 The `deep_equal_pattern` filter allows you to filter events based on a pattern. Use `deep_not_equal_pattern` for the inverse.
 
 ```python
-from panther_config import detection
+from panther_sdk import detection
 from panther_utils import match_filters
 
 # example: match server logs with /api/ in their path
@@ -58,7 +58,7 @@ detection.Rule(
 The `deep_in` filter allows you to filter events based on a pattern. Use `deep_not_in` for the inverse.
 
 ```python
-from panther_config import detection
+from panther_sdk import detection
 from panther_utils import match_filters
 
 # example: match server logs with POST or PUT requests
@@ -96,7 +96,7 @@ Listed below are all the available filters in the `match_filters` module alongsi
 The `ips_in_cidr` filter allows you to filter events based whether IPs are in a CIDR range. The optional `path` argument can target a dot-separated path to a single IP string or a list of IP strings. The `path` argument defaults to the Panther field `p_any_ip_addresses`. This filter uses the python [ipaddress](https://docs.python.org/3.9/library/ipaddress.html#) module to perform the comparison.
 
 ```python
-from panther_config import detection
+from panther_sdk import detection
 from panther_utils import network_filters
 
 # example: match server logs coming from 10.x.x.x

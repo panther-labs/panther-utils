@@ -1,4 +1,4 @@
-from panther_config import testing
+from panther_sdk import testing
 from panther_utils import network_filters
 
 

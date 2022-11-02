@@ -1,30 +1,31 @@
 # Targets for local development
-install:: utl_activate ci_install
-fmt::     install ci_fmt
+shell::   pipenv shell
+install:: ci_install
+sync::    ci_sync 
+fmt::     ci_fmt
 lint::    fmt ci_lint
 test::    fmt ci_lint ci_test
 
-# Targets for CI
-ci_install::
-	pip3 install -qr dev-requirements.txt
+.SILENT: git_reset
 
+# Targets for CI
 ci_fmt::
-	black panther_utils tests
+	pipenv run black panther_utils tests
 
 ci_lint::
-	mypy --config-file mypy.ini panther_utils tests
+	pipenv run mypy --config-file mypy.ini panther_utils tests
 
 ci_test::
-	nosetests -v --with-coverage --cover-package=panther_utils --cover-min-percentage=100
+	pipenv run nosetests -v --with-coverage --cover-package=panther_utils --cover-min-percentage=100
 
-# Utility targets
-venv:
-	python3 -m venv venv
+ci_install:
+	pipenv install --dev
 
-utl_activate: venv
-	. venv/bin/activate
+ci_sync:
+	pipenv sync --dev
 
-publish: utl_activate
+# Other targets
+publish:
 	rm -rf dist
-	python3 setup.py sdist
-	twine upload ./dist/panther_utils-*.tar.gz
+	pipenv run python3 setup.py sdist
+	pipenv run twine upload ./dist/panther_utils-*.tar.gz

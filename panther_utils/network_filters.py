@@ -1,4 +1,4 @@
-from panther_config import detection, PantherEvent
+from panther_sdk import detection, PantherEvent
 
 __all__ = ["ips_in_cidr"]
 
